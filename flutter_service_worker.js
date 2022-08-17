@@ -30,9 +30,9 @@ const RESOURCES = {
 "canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
 "canvaskit/profiling/canvaskit.wasm": "95e736ab31147d1b2c7b25f11d4c32cd",
 "flutter.js": "eb2682e33f25cd8f1fc59011497c35f8",
-"index.html": "05aebf0b08c535d80624688a599eba80",
-"/": "05aebf0b08c535d80624688a599eba80",
-"main.dart.js": "3e677bc3530d7abad7ddc03eaf6b2fa6",
+"index.html": "2711dc5eac69ac596e38253365dba4aa",
+"/": "2711dc5eac69ac596e38253365dba4aa",
+"main.dart.js": "53d62f79fa714d864a39e7ec2eef788a",
 "manifest.json": "d8fe34f7ae4c072a77b924e01dac8a50",
 "raksmey.png": "5a1b51ff028c7d42b22dc5b8ff02245b",
 "version.json": "9b818ca9511483c901bed1545384376c"

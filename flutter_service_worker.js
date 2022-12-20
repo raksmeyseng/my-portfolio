@@ -7,7 +7,7 @@ const RESOURCES = {
 "assets/assets/fonts/Electrolize-Regular.ttf": "1be3e0aaeb2bbd1985615a49da7f2eaf",
 "assets/assets/fonts/Montserrat-Regular.ttf": "ee6539921d713482b8ccd4d0d23961bb",
 "assets/assets/images/brand_identity.jpg": "8d06f606ecd7927864ca904afc8e8ef9",
-"assets/assets/images/cover.png": "0af9eac5020e4fff73acc8c7d5e799ea",
+"assets/assets/images/cover.png": "d47937c1c25bb683af7d82eb6ccf1d40",
 "assets/assets/images/ecomerce.jpg": "daf9b9bc8622596361183cf8dcc4deec",
 "assets/assets/images/financial.jpg": "ad2ce02beb1ac05db0a54cfbb1b819a8",
 "assets/assets/images/food_delivery.jpg": "ed8fa1c106270801851152e694c770a8",
@@ -20,19 +20,25 @@ const RESOURCES = {
 "assets/assets/video/comming-soon.mp4": "18d09552cbc5b1a324b8cd161a5af1de",
 "assets/FontManifest.json": "c537e33a2cfe8cde17229a93b41bbdc2",
 "assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
-"assets/NOTICES": "ca11fc5868c48d0a86b20faf0c3e5ddb",
+"assets/NOTICES": "a9456a818199785edc82902f30a702ce",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "d1722d5cf2c7855862f68edb85e31f88",
-"assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "613e4cc1af0eb5148b8ce409ad35446d",
-"assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "dd3c4233029270506ecc994d67785a37",
-"canvaskit/canvaskit.js": "c2b4e5f3d7a3d82aed024e7249a78487",
-"canvaskit/canvaskit.wasm": "4b83d89d9fecbea8ca46f2f760c5a9ba",
-"canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
-"canvaskit/profiling/canvaskit.wasm": "95e736ab31147d1b2c7b25f11d4c32cd",
-"flutter.js": "eb2682e33f25cd8f1fc59011497c35f8",
-"index.html": "2711dc5eac69ac596e38253365dba4aa",
-"/": "2711dc5eac69ac596e38253365dba4aa",
-"main.dart.js": "53d62f79fa714d864a39e7ec2eef788a",
+"assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "99f29024aee8f4672a47cc3a81b9b84a",
+"assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "48ce1bb8a42776caa951cb782d277730",
+"assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "d8e9b6203ce2657c991f0b339ccb3a6d",
+"assets/shaders/ink_sparkle.frag": "ae6c1fd6f6ee6ee952cde379095a8f3f",
+"canvaskit/canvaskit.js": "2bc454a691c631b07a9307ac4ca47797",
+"canvaskit/canvaskit.wasm": "bf50631470eb967688cca13ee181af62",
+"canvaskit/profiling/canvaskit.js": "38164e5a72bdad0faa4ce740c9b8e564",
+"canvaskit/profiling/canvaskit.wasm": "95a45378b69e77af5ed2bc72b2209b94",
+"favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"flutter.js": "f85e6fb278b0fd20c349186fb46ae36d",
+"icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
+"icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
+"icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
+"icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
+"index.html": "b13694fc86eb30f2063c4d7137ae9829",
+"/": "b13694fc86eb30f2063c4d7137ae9829",
+"main.dart.js": "274eb2cf73fa67813c907818a096c6cc",
 "manifest.json": "d8fe34f7ae4c072a77b924e01dac8a50",
 "raksmey.png": "5a1b51ff028c7d42b22dc5b8ff02245b",
 "version.json": "9b818ca9511483c901bed1545384376c"
@@ -43,7 +49,6 @@ const RESOURCES = {
 const CORE = [
   "main.dart.js",
 "index.html",
-"assets/NOTICES",
 "assets/AssetManifest.json",
 "assets/FontManifest.json"];
 // During install, the TEMP cache is populated with the application shell files.
@@ -142,9 +147,11 @@ self.addEventListener("fetch", (event) => {
     .then((cache) =>  {
       return cache.match(event.request).then((response) => {
         // Either respond with the cached resource, or perform a fetch and
-        // lazily populate the cache.
+        // lazily populate the cache only if the resource was successfully fetched.
         return response || fetch(event.request).then((response) => {
-          cache.put(event.request, response.clone());
+          if (response && Boolean(response.ok)) {
+            cache.put(event.request, response.clone());
+          }
           return response;
         });
       })
